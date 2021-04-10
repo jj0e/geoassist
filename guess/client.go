@@ -59,4 +59,5 @@ func (game *GameInstance) Watch() {
 		time.Sleep(time.Second)
 	}
 	fmt.Print(utils.GetTimestamp(), "The game ended, hopefully you won!\n")
+	time.Sleep(time.Hour * 24)
 }
