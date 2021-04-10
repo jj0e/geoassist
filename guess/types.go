@@ -7,6 +7,9 @@ import (
 type GameInstance struct {
 	Endpoint   string
 	GameClient *resty.Client
+	Username   string
+	Password   string
+	AuthCookie string
 }
 
 type GameResult struct {
@@ -21,4 +24,11 @@ type GameResult struct {
 			Correct     bool   `json:"wasCorrect"`
 		} `json:"guesses"`
 	} `json:"players"`
+	Rounds []struct {
+		Number    int     `json:"roundNumber"`
+		Latitude  float64 `json:"lat"`
+		Longitude float64 `json:"lng"`
+		Answer    string  `json:"answer"`
+	} `json:"rounds"`
+	IsEnded bool `json:"hasGameEnded"`
 }
