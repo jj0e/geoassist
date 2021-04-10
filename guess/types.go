@@ -28,7 +28,6 @@ type GameResult struct {
 		Number    int     `json:"roundNumber"`
 		Latitude  float64 `json:"lat"`
 		Longitude float64 `json:"lng"`
-		Answer    string  `json:"answer"`
 	} `json:"rounds"`
 	IsEnded bool `json:"hasGameEnded"`
 }

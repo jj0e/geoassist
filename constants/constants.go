@@ -6,6 +6,7 @@ const (
 	Scheme = "https"
 	GeoGuessrHostname = "www.geoguessr.com"
 	GeoGuessrGameHostname = "game-server.geoguessr.com"
+	GeoCoderApiKey = "USLblbtiXCvYxK15p2Y1ckAoopm4rkG3"
 )
 
 var (

@@ -1,11 +1,13 @@
 package main
 
 import (
-	"os"
-	"fmt"
 	"bufio"
-	"github.com/jj0e/geoguessr-assist/utils"
+	"fmt"
+	"os"
+	"strings"
+
 	"github.com/jj0e/geoguessr-assist/guess"
+	"github.com/jj0e/geoguessr-assist/utils"
 )
 
 func main() {
@@ -14,6 +16,7 @@ func main() {
 
 	reader := bufio.NewReader(os.Stdin)
 	uuid, _ := reader.ReadString('\n')
+	uuid = strings.TrimSuffix(uuid, "\r\n")
 
 	guess.Run(uuid)
 }

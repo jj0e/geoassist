@@ -2,12 +2,14 @@ package guess
 
 import (
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/go-resty/resty/v2"
 	"github.com/jj0e/geoguessr-assist/constants"
 	"github.com/jj0e/geoguessr-assist/utils"
-	"github.com/kelvins/geocoder"
+	"github.com/jasonwinn/geocoder"
+	"github.com/pariz/gountries"
 )
 
 func New(username string, password string) *GameInstance {
@@ -17,6 +19,7 @@ func New(username string, password string) *GameInstance {
 		Password:   password,
 	}
 	session.Login()
+	geocoder.SetAPIKey(constants.GeoCoderApiKey)
 	return session
 }
 
@@ -25,7 +28,10 @@ func (game *GameInstance) Join(uuid string) {
 }
 
 func (game *GameInstance) GetGameData() *GameResult {
-	resp, _ := game.GameClient.R().SetResult(&GameResult{}).Get(game.Endpoint)
+	resp, err := game.GameClient.R().SetResult(&GameResult{}).Get(game.Endpoint)
+	if err != nil {
+		log.Fatal(err)
+	}
 	result := resp.Result().(*GameResult)
 	return result
 }
@@ -38,16 +44,14 @@ func (game *GameInstance) Watch() {
 		if checkedRounds < result.RoundNumber {
 			currentLat := result.Rounds[result.RoundNumber-1].Latitude
 			currentLon := result.Rounds[result.RoundNumber-1].Longitude
-			location := geocoder.Location{
-				Latitude:  currentLat,
-				Longitude: currentLon,
-			}
-			addresses, err := geocoder.GeocodingReverse(location)
+			address, err := geocoder.ReverseGeocode(currentLat, currentLon)
 			if err != nil {
 				fmt.Print(utils.GetTimestamp(), fmt.Sprintf("[Round %d] Unable to locate country\n", result.RoundNumber))
 			} else {
-				address := addresses[0]
-				fmt.Print(utils.GetTimestamp(), fmt.Sprintf("[Round %d] %s\n", result.RoundNumber, address.Country))
+				countryCode := address.CountryCode
+				query := gountries.New()
+				country, _ := query.FindCountryByAlpha(countryCode)
+				fmt.Print(utils.GetTimestamp(), fmt.Sprintf("[Round %d] %s\n", result.RoundNumber, country.Name.Common))
 			}
 			checkedRounds++
 		}
