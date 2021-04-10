@@ -11,7 +11,6 @@ import (
 )
 
 func Run(uuid string) {
-	fmt.Print("\033[H\033[2J")
 	fm := files.New()
 	conf := fm.LoadConfig()
 	if conf.Email == "" || conf.Password == "" {
@@ -26,7 +25,6 @@ func Run(uuid string) {
 		conf.Email = email
 		conf.Password = password
 		fm.UpdateConfig(&conf)
-		fmt.Print("\033[H\033[2J")
 	}
 
 	instance := New(conf.Email, conf.Password)
