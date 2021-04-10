@@ -4,10 +4,13 @@ import "fmt"
 
 const (
 	Scheme = "https"
-	GeoGuessrHostname = "game-server.geoguessr.com"
+	GeoGuessrHostname = "www.geoguessr.com"
+	GeoGuessrGameHostname = "game-server.geoguessr.com"
 )
 
 var (
-	GeoGuessrHost = fmt.Sprintf("%s://%s", Scheme, GeoGuessrHostname)
-	GeoGuessrBattleRoyaleEndpoint = GeoGuessrHost + "/api/battle-royale"
+	GeoGuessrHost = fmt.Sprintf("%s://%s", Scheme, GeoGuessrGameHostname)
+	GeoGuessrGameHost = fmt.Sprintf("%s://%s", Scheme, GeoGuessrGameHostname)
+	GeoGuessrLoginEndpoint = GeoGuessrHost + "/api/v3/accounts/signin"
+	GeoGuessrBattleRoyaleEndpoint = GeoGuessrGameHost + "/api/battle-royale"
 )
