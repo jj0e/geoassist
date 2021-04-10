@@ -6,7 +6,7 @@ __GeoAssist__ is a tool that can be used to see what other players are correctly
 
 ### Usage
 
-GeoAssist is extremley user-friendly. To get started, simply join a game of battle royale. Once you join a lobby, look in the url bar of your browser. You will see a unique identifier known as a [uuid](https://en.wikipedia.org/wiki/Universally_unique_identifier#:~:text=A%20universally%20unique%20identifier%20(UUID,%2C%20for%20practical%20purposes%2C%20unique) Copy + paste this into GeoAssist.
+GeoAssist is extremley user-friendly. To get started, simply join a game of battle royale. Once you join a lobby, look in the url bar of your browser. You will see a unique identifier known as a [uuid](https://en.wikipedia.org/wiki/Universally_unique_identifier) Copy + paste this into GeoAssist.
 
 Sit back and relax! GeoAssist will start watching the game and as soon as someone guesses the correct answer, you will be notified!
 
